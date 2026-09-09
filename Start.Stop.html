@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>Lab 1 | Hello, Audio</title>
+    </head>
+<body>
+    <button id="start1">Start</button>
+    <button id="stop1">Stop</button>
+    <button id="start2">Start</button>
+    <button id="stop2">Stop</button>
+<script>
+    const ctx = new AudioContext()
+
+    const myGain = new GainNode(ctx);
+    myGain.gain.value = 0.125
+    myGain.connect(ctx.destination);
+    document.querySelector("#start1").onclick = () => {
+        ctx.resume();
+        osc1 = new OscillatorNode (ctx)
+        osc1.frequency.value = 110
+        osc1.type = "sawtooth"
+        osc2 = new OscillatorNode (ctx)
+        osc2.frequency.value = 110*(4.1)
+         osc3 = new OscillatorNode (ctx)
+        osc3.frequency.value = 110*(3)
+
+
+        osc1.connect(myGain)
+        osc2.connect(myGain)
+        osc3.connect(myGain)
+
+
+        osc1.start()
+        osc2.start()
+        osc3.start()
+
+    }
+    document.querySelector("#stop1").onclick = () => {
+        osc1.stop()
+        osc2.stop()
+        osc3.stop()
+    }
+    document.querySelector("#start2").onclick = () => {
+        ctx.resume();
+        osc4 = new OscillatorNode (ctx)
+        osc4.frequency.value = 465
+        osc4.type = "triangle"
+
+        osc5 = new OscillatorNode (ctx)
+        osc5.frequency.value = 465*(4.1)
+        osc6 = new OscillatorNode (ctx)
+        osc6.frequency.value = 465*(1.25)
+
+        osc4.connect(myGain)
+        osc5.connect(myGain)
+        osc6.connect(myGain)
+
+
+        osc4.start()
+        osc5.start()
+        osc6.start()
+    }
+    document.querySelector("#stop2").onclick = () => {
+        osc4.stop()
+        osc5.stop()
+        osc6.stop()
+    }
+</script>
+</body>
+</html>
